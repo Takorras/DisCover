@@ -38,6 +38,7 @@ class Home extends React.Component {
           style={styles.toolbar}
           title="DisCover"
           titleColor="white"
+          actions={[{title: "Settings", icon: require("./settings.png"), show: "always"}]}
         />
         <TabNavigation/>
       </View>
