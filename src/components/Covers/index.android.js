@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import CoverItem from './CoverItem';
-import { fetchCovers } from '../../actions/coverAction.js';
+import Cover from './Cover';
+import { openModal } from '../../actions';
+import ImageModal from '../Home/ImageModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
   }
 })
 
-class Cover extends React.Component {
+class Covers extends React.Component {
   componentDidMount() {
     this.props.fetchCovers();
   }
@@ -30,7 +31,8 @@ class Cover extends React.Component {
         <FlatList
           numColumns={3}
           data={this.props.books}
-          renderItem={item => <CoverItem book={item.item.volumeInfo}/>}
+          keyExtractor={(_, index) => index}
+          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item.volumeInfo.imageLinks.thumbnail)}/>}
           onEndReached={info => this.onEndReached()}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
@@ -40,6 +42,7 @@ class Cover extends React.Component {
               size="large"
               color="peru"/>
           } />
+        <ImageModal/>
       </View>
     )
   }
@@ -54,8 +57,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "art" })
+    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "ゆるキャン" }),
+    openModal: url => dispatch(openModal(url))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cover);
+export default connect(mapStateToProps, mapDispatchToProps)(Covers);

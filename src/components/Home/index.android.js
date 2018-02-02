@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ToolbarAndroid, ActivityIndicator, StatusBar, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Cover from '../Cover';
+import Covers from '../Covers';
 import Favorite from '../Favorite';
 import Search from '../Search';
 
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 });
 
 const TabNavigation = TabNavigator({
-  Cover: { screen: Cover },
+  Cover: { screen: Covers },
   Favorite: { screen: Favorite },
   Search: { screen: Search }
 }, {

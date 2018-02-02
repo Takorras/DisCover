@@ -14,8 +14,18 @@ function* fetchCovers(action) {
   }
 }
 
+function* addFavorite(action) {
+  yield put({ type: 'ADD_FAVORITE', book: action.book });
+}
+
+function* removeFavorite(action) {
+  yield put({ type: 'REMOVE_FAVORITE', book: action.book });
+}
+
 function* sagas() {
   yield takeEvery('FETCH_COVER_REQUESTED', fetchCovers);
+  yield takeEvery('ADD_FAVORITE_COVER', addFavorite);
+  yield takeEvery('REMOVE_FAVORITE_COVER', removeFavorite);
 }
 
 export default sagas;
