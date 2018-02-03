@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
 class Search extends React.Component {
   onEndReached() {
-    if (this.props.query) this.props.fetchCovers();
+    if (this.props.query) this.props.fetchCovers(this.props.query);
   }
 
   render() {

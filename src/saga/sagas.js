@@ -16,8 +16,8 @@ function* fetchCovers(action) {
 
 function* fetchSearchCovers(action) {
   yield put({ type: 'CONTENT_SEARCH_LOADING' });
-  const threshold = yield select(state => state.coverReducer.threshold);
-  const index = yield select(state => state.coverReducer.index);
+  const threshold = yield select(state => state.searchReducer.threshold);
+  const index = yield select(state => state.searchReducer.index);
 
   try {
     const books = yield call(api.fetchBooks, action.query, threshold, index);
