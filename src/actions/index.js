@@ -13,3 +13,7 @@ export const addFavorite = (book) => {
 export const removeFavorite = (book) => {
   return { type: 'REMOVE_FAVORITE', book: book };
 }
+
+export const editQuery = (text) => {
+  return { type: 'EDIT_QUERY', text: text };
+}
