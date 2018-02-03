@@ -15,6 +15,7 @@ const coverReducer = (state=initialState, action) => {
     case 'BOOKS_FETCH_FAILED':
       return { ...state, loading: false, error: action.message };
     case 'ADD_FAVORITE':
+      if (state.favorites.includes(action.book)) return state;
       return { ...state, favorites: state.favorites.concat(action.book) };
     case 'REMOVE_FAVORITE':
       return { ...state, favorites: state.favorites.filter(element => (element!=action.book)) };

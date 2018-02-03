@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import Cover from '../Covers/Cover';
+import { openModal } from '../../actions';
+import ImageModal from '../Home/ImageModal';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingRight: 2,
+    paddingLeft: 2
   }
 })
 
 class Favorite extends React.Component {
-  onEndReached() {
-    if (!this.props.loading) this.props.fetchCovers();
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -21,9 +21,7 @@ class Favorite extends React.Component {
           numColumns={3}
           data={this.props.books}
           keyExtractor={(_, index) => index}
-          renderItem={item => <Cover book={item.item}/>}
-          onEndReached={info => {}}
-          onEndReachedThreshold={0.5}
+          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item)}/>}
           ListFooterComponent={
             <ActivityIndicator
               style={styles.indicator}
@@ -31,6 +29,7 @@ class Favorite extends React.Component {
               size="large"
               color="peru"/>
           } />
+        <ImageModal/>
       </View>
     )
   }
@@ -43,4 +42,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Favorite);
+const mapDispatchToProps = dispatch => {
+  return {
+    openModal: book => dispatch(openModal(book))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorite);

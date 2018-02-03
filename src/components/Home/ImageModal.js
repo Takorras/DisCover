@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Modal, Image, TouchableOpacity, View, Linking } from 'react-native';
-import { closeModal } from '../../actions';
+import { StyleSheet, Modal, Image, TouchableOpacity, View, Linking, ToastAndroid } from 'react-native';
+import { closeModal, addFavorite } from '../../actions';
 
 const styles = StyleSheet.create({
   imageContainer: {
@@ -55,6 +55,13 @@ class ImageModal extends React.Component {
               tintColor="chocolate"
               source={require('./info.png')} />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.addFavorite(this.props.book)}>
+            <Image
+              style={styles.button}
+              resizeMode='contain'
+              tintColor="chocolate"
+              source={require('./favorite.png')} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => {console.log("save")}}>
             <Image
               style={styles.button}
@@ -78,6 +85,7 @@ class ImageModal extends React.Component {
 const mapStateToProps = state => {
   return {
     modalOpen: state.modalReducer.modalOpen,
+    book: state.modalReducer.book,
     bookInfoUrl: state.modalReducer.book ? state.modalReducer.book.infoLink : '',
     coverImageUrl: state.modalReducer.book ? state.modalReducer.book.imageLinks.thumbnail : ''
   };
@@ -86,6 +94,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
+    addFavorite: book => {
+      ToastAndroid.show('Added to Favorite !', ToastAndroid.SHORT);
+      dispatch(addFavorite(book));
+    }
   };
 }
 
