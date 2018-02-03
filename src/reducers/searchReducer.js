@@ -8,7 +8,7 @@ const initialState = {
 
 const searchReducer = (state=initialState, action) => {
   switch (action.type) {
-    case 'CONTENT_LOADING':
+    case 'CONTENT_SEARCH_LOADING':
       return { ...state, loading: true, books: [] };
     case 'BOOKS_FETCH_SEARCH_SUCCEEDED':
       return { ...state, loading: false, books: state.books.concat(action.books), index: state.index+state.threshold };

@@ -16,22 +16,14 @@ class Favorite extends React.Component {
       <CoversList
         data={this.props.books}
         onClick={this.props.openModal}
-        listFooterComponent={
-          <ActivityIndicator
-            style={styles.indicator}
-            animating={this.props.loading}
-            size="large"
-            color="peru"/>
-        }/>
+        onEndReached={() => {}}
+      />
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    loading: state.coverReducer.loading,
-    books: state.coverReducer.favorites
-  }
+  return { books: state.favoriteReducer.books };
 }
 
 const mapDispatchToProps = dispatch => {

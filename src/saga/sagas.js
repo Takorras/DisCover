@@ -15,7 +15,7 @@ function* fetchCovers(action) {
 }
 
 function* fetchSearchCovers(action) {
-  yield put({ type: 'CONTENT_LOADING' });
+  yield put({ type: 'CONTENT_SEARCH_LOADING' });
   const threshold = yield select(state => state.coverReducer.threshold);
   const index = yield select(state => state.coverReducer.index);
 
@@ -29,7 +29,7 @@ function* fetchSearchCovers(action) {
 
 function* sagas() {
   yield takeEvery('FETCH_COVER_REQUESTED', fetchCovers);
-  yield takeEvery('FETCH_SEARCH_COVER_REQUESTED', fetchSearchCovers)
+  yield takeEvery('FETCH_SEARCH_COVER_REQUESTED', fetchSearchCovers);
 }
 
 export default sagas;
