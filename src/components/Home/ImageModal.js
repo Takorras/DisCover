@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     marginLeft: 24,
-    marginBottom: 24
+    marginBottom: 24,
+    tintColor: "chocolate"
   }
 })
 
@@ -52,21 +53,18 @@ class ImageModal extends React.Component {
             <Image
               style={styles.button}
               resizeMode='contain'
-              tintColor="chocolate"
               source={require('./info.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.addFavorite(this.props.book)}>
             <Image
               style={styles.button}
               resizeMode='contain'
-              tintColor="chocolate"
               source={require('./favorite.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {console.log("save")}}>
             <Image
               style={styles.button}
               resizeMode='contain'
-              tintColor="chocolate"
               source={require('./save.png')} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.closeModal()}>
@@ -94,10 +92,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addFavorite: book => {
-      ToastAndroid.show('Added to Favorite !', ToastAndroid.SHORT);
-      dispatch({ type: 'ADD_FAVORITE', book: book });
-    }
+    addFavorite: book => dispatch({ type: 'ADD_FAVORITE', book: book })
   };
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ToolbarAndroid, StatusBar } from 'react-native';
+import { StyleSheet, View, ToolbarAndroid, StatusBar, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Covers from '../Covers';
 import Favorite from '../Favorite';
@@ -13,6 +13,12 @@ const styles = StyleSheet.create({
   toolbar: {
     height: 56,
     backgroundColor: "peru"
+  },
+  toolbarTitle: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+    fontFamily: "serif"
   },
   statusBar: {
     height: StatusBar.currentHeight,
@@ -42,10 +48,8 @@ class Home extends React.Component {
         <View style={styles.statusBar}/>
         <ToolbarAndroid
           style={styles.toolbar}
-          title="DisCover"
-          titleColor="white"
           actions={[{title: "Settings", icon: require("./settings.png"), show: "always"}]}
-        />
+        >{<Text style={styles.toolbarTitle}>DisCover</Text>}</ToolbarAndroid>
         <TabNavigation/>
         <ImageModal/>
       </View>
