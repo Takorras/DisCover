@@ -27,9 +27,33 @@ function* fetchSearchCovers(action) {
   }
 }
 
+function* addFavorite(action) {
+  let favorites = yield select(state => state.favoriteReducer.books);
+  if (favorites && favorites.includes(action.book)) return;
+  if (!favorites) favorites = [];
+  try {
+    favorites = favorites.concat(action.book);
+    yield call(api.setDB, 'favorites', favorites);
+    yield put({ type: 'ADD_FAVORITE_SUCCEEDED', books: favorites });
+  } catch (e) {
+    yield put({ type: 'DB_FETCH_FAILED', message: e.message });
+  }
+}
+
+function* fetchFavorite(action) {
+  try {
+    const favorites = yield call(api.fetchDB, 'favorites');
+    yield put({ type: 'FAVORITES_FETCH_SUCCEEDED', books: favorites });
+  } catch (e) {
+    yield put({ type: 'DB_FETCH_FAILED', message: e.message });
+  }
+}
+
 function* sagas() {
   yield takeEvery('FETCH_COVER_REQUESTED', fetchCovers);
   yield takeEvery('FETCH_SEARCH_COVER_REQUESTED', fetchSearchCovers);
+  yield takeEvery('ADD_FAVORITE', addFavorite);
+  yield takeEvery('FETCH_FAVORITE', fetchFavorite);
 }
 
 export default sagas;

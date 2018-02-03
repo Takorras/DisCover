@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
 })
 
 class Favorite extends React.Component {
+  componentDidMount() {
+    this.props.fetchFavorite();
+  }
+
   render() {
     return (
       <CoversList
@@ -28,6 +32,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchFavorite: () => dispatch({ type: 'FETCH_FAVORITE' }),
     openModal: book => dispatch(openModal(book))
   };
 }

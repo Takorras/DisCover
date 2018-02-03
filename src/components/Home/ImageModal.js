@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Modal, Image, TouchableOpacity, View, Linking, ToastAndroid } from 'react-native';
-import { closeModal, addFavorite } from '../../actions';
+import { closeModal } from '../../actions';
 
 const styles = StyleSheet.create({
   imageContainer: {
@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => {
     closeModal: () => dispatch(closeModal()),
     addFavorite: book => {
       ToastAndroid.show('Added to Favorite !', ToastAndroid.SHORT);
-      dispatch(addFavorite(book));
+      dispatch({ type: 'ADD_FAVORITE', book: book });
     }
   };
 }
