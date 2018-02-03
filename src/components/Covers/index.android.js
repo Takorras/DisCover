@@ -32,7 +32,7 @@ class Covers extends React.Component {
           numColumns={3}
           data={this.props.books}
           keyExtractor={(_, index) => index}
-          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item.volumeInfo.imageLinks.thumbnail)}/>}
+          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item)}/>}
           onEndReached={info => this.onEndReached()}
           onEndReachedThreshold={0.5}
           ListFooterComponent={
@@ -58,7 +58,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "ゆるキャン" }),
-    openModal: url => dispatch(openModal(url))
+    openModal: book => dispatch(openModal(book))
   };
 }
 

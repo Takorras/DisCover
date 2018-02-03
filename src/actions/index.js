@@ -1,5 +1,5 @@
-export const openModal = (imageUrl) => {
-  return { type: 'OPEN_MODAL', url: imageUrl };
+export const openModal = (book) => {
+  return { type: 'OPEN_MODAL', book: book };
 }
 
 export const closeModal = () => {

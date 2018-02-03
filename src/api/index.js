@@ -4,6 +4,7 @@ const api = {
       .then(response => response.json())
       .then(json => json.items)
       .then(books => books.filter(element => (element.volumeInfo.imageLinks)))
+      .then(books => books.map(element => element.volumeInfo))
   }
 }
 

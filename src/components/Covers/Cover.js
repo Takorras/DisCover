@@ -20,7 +20,7 @@ const Cover = ({ book, onClick }) => (
   <TouchableOpacity style={styles.container} onPress={onClick}>
     <Image
       style={styles.image}
-      source={{ uri: book.volumeInfo.imageLinks.thumbnail }}/>
+      source={{ uri: book.imageLinks.thumbnail }}/>
   </TouchableOpacity>
 )
 
