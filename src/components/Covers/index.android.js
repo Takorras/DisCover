@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import Cover from './Cover';
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import CoversList from './CoversList';
 import { openModal } from '../../actions';
-import ImageModal from '../Home/ImageModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
   indicator: {
     margin: 16
   }
-})
+});
 
 class Covers extends React.Component {
   componentDidMount() {
@@ -27,23 +26,17 @@ class Covers extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          numColumns={3}
-          data={this.props.books}
-          keyExtractor={(_, index) => index}
-          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item)}/>}
-          onEndReached={info => this.onEndReached()}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            <ActivityIndicator
-              style={styles.indicator}
-              animating={this.props.loading}
-              size="large"
-              color="peru"/>
-          } />
-        <ImageModal/>
-      </View>
+      <CoversList
+        data={this.props.books}
+        onClick={this.props.openModal}
+        onEndReached={() => this.onEndReached()}
+        listFooterComponent={
+          <ActivityIndicator
+            style={styles.indicator}
+            animating={this.props.loading}
+            size="large"
+            color="peru"/>}
+      />
     )
   }
 }
@@ -57,7 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "ゆるキャン" }),
+    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "Design" }),
     openModal: book => dispatch(openModal(book))
   };
 }

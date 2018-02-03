@@ -4,6 +4,7 @@ import { TabNavigator } from 'react-navigation';
 import Covers from '../Covers';
 import Favorite from '../Favorite';
 import Search from '../Search';
+import ImageModal from './ImageModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,6 +47,7 @@ class Home extends React.Component {
           actions={[{title: "Settings", icon: require("./settings.png"), show: "always"}]}
         />
         <TabNavigation/>
+        <ImageModal/>
       </View>
     )
   }

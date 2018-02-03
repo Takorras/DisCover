@@ -1,16 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, FlatList, ActivityIndicator, TextInput } from 'react-native';
-import Cover from '../Covers/Cover';
+import { StyleSheet, ActivityIndicator, TextInput } from 'react-native';
+import CoversList from '../Covers/CoversList';
 import { openModal, editQuery } from '../../actions';
-import ImageModal from '../Home/ImageModal';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingRight: 2,
-    paddingLeft: 2
-  },
   indicator: {
     margin: 16
   },
@@ -28,30 +22,25 @@ class Search extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          numColumns={3}
-          data={this.props.books}
-          keyExtractor={(_, index) => index}
-          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item)}/>}
-          onEndReached={info => this.onEndReached()}
-          onEndReachedThreshold={0.5}
-          ListHeaderComponent={
-            <TextInput
-              style={styles.input}
-              placeholder="Keyword..."
-              onChangeText={text => this.props.editQuery(text)}
-              onSubmitEditing={() => this.props.fetchCovers(this.props.query)} />
-          }
-          ListFooterComponent={
-            <ActivityIndicator
-              style={styles.indicator}
-              animating={this.props.loading}
-              size="large"
-              color="peru"/>
-          } />
-        <ImageModal/>
-      </View>
+      <CoversList
+        data={this.props.books}
+        onClick={this.props.openModal}
+        onEndReached={() => this.onEndReached()}
+        listHeaderComponent={
+          <TextInput
+            style={styles.input}
+            placeholder="Keyword..."
+            onChangeText={text => this.props.editQuery(text)}
+            onSubmitEditing={() => this.props.fetchCovers(this.props.query)} />
+        }
+        listFooterComponent={
+          <ActivityIndicator
+            style={styles.indicator}
+            animating={this.props.loading}
+            size="large"
+            color="peru"/>
+        }
+      />
     )
   }
 }

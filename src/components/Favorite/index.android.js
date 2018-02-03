@@ -1,36 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
-import Cover from '../Covers/Cover';
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import CoversList from '../Covers/CoversList';
 import { openModal } from '../../actions';
-import ImageModal from '../Home/ImageModal';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingRight: 2,
-    paddingLeft: 2
+  indicator: {
+    margin: 16
   }
 })
 
 class Favorite extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList
-          numColumns={3}
-          data={this.props.books}
-          keyExtractor={(_, index) => index}
-          renderItem={item => <Cover book={item.item} onClick={()=>this.props.openModal(item.item)}/>}
-          ListFooterComponent={
-            <ActivityIndicator
-              style={styles.indicator}
-              animating={this.props.loading}
-              size="large"
-              color="peru"/>
-          } />
-        <ImageModal/>
-      </View>
+      <CoversList
+        data={this.props.books}
+        onClick={this.props.openModal}
+        listFooterComponent={
+          <ActivityIndicator
+            style={styles.indicator}
+            animating={this.props.loading}
+            size="large"
+            color="peru"/>
+        }/>
     )
   }
 }
