@@ -1,18 +1,58 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
+import { StyleSheet, ActivityIndicator } from 'react-native';
+import CoversList from './CoversList';
+import { openModal } from '../../actions';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingRight: 2,
+    paddingLeft: 2
+  },
+  indicator: {
+    margin: 16
   }
-})
+});
 
-class Cover extends React.Component {
+class Covers extends React.Component {
+  componentDidMount() {
+    this.props.fetchCovers();
+  }
+
+  onEndReached() {
+    if (!this.props.loading) this.props.fetchCovers();
+  }
+
   render() {
     return (
-      <View style={styles.container}/>
+      <CoversList
+        data={this.props.books}
+        onClick={this.props.openModal}
+        onEndReached={() => this.onEndReached()}
+        listFooterComponent={
+          <ActivityIndicator
+            style={styles.indicator}
+            animating={this.props.loading}
+            size="large"
+            color="peru"/>}
+      />
     )
   }
 }
 
-export default Cover;
+const mapStateToProps = state => {
+  return {
+    loading: state.coverReducer.loading,
+    books: state.coverReducer.books
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "Design" }),
+    openModal: book => dispatch(openModal(book))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Covers);
