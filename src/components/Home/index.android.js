@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ToolbarAndroid, ActivityIndicator, StatusBar, Text } from 'react-native';
+import { StyleSheet, View, ToolbarAndroid, StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Covers from '../Covers';
 import Favorite from '../Favorite';
@@ -10,8 +10,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   toolbar: {
-    marginTop: StatusBar.currentHeight,
     height: 56,
+    backgroundColor: "peru"
+  },
+  statusBar: {
+    height: StatusBar.currentHeight,
+    width: "100%",
     backgroundColor: "peru"
   }
 });
@@ -34,6 +38,7 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.statusBar}/>
         <ToolbarAndroid
           style={styles.toolbar}
           title="DisCover"
