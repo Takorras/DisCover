@@ -49,11 +49,20 @@ function* fetchFavorite(action) {
   }
 }
 
+function* saveImage(action) {
+  try {
+    yield call(api.downloadFile, action.url);
+  } catch (e) {
+    yield put({ type: 'DB_FETCH_FAILED', message: e.message });
+  }
+}
+
 function* sagas() {
   yield takeEvery('FETCH_COVER_REQUESTED', fetchCovers);
   yield takeEvery('FETCH_SEARCH_COVER_REQUESTED', fetchSearchCovers);
   yield takeEvery('ADD_FAVORITE', addFavorite);
   yield takeEvery('FETCH_FAVORITE', fetchFavorite);
+  yield takeEvery('SAVE_IMAGE', saveImage);
 }
 
 export default sagas;

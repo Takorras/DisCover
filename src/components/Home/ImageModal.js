@@ -61,7 +61,7 @@ class ImageModal extends React.Component {
               resizeMode='contain'
               source={require('./favorite.png')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {console.log("save")}}>
+          <TouchableOpacity onPress={() => this.props.saveImage(this.trimUrl(this.props.coverImageUrl))}>
             <Image
               style={styles.button}
               resizeMode='contain'
@@ -92,7 +92,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addFavorite: book => dispatch({ type: 'ADD_FAVORITE', book: book })
+    addFavorite: book => dispatch({ type: 'ADD_FAVORITE', book: book }),
+    saveImage: coverImageUrl => dispatch({ type: 'SAVE_IMAGE', url: coverImageUrl })
   };
 }
 

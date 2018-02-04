@@ -14,6 +14,14 @@ const api = {
   },
   setDB (key, value) {
     return AsyncStorage.setItem(key, JSON.stringify(value))
+  },
+  downloadFile (url) {
+    const RNFS = require('react-native-fs');
+    const id = url.split('=')[1].split('&')[0];
+    return RNFS.downloadFile({
+      fromUrl: url,
+      toFile: `${RNFS.PicturesDirectoryPath}/${id}.png`
+    }).promise
   }
 }
 
