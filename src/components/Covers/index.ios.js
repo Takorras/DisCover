@@ -50,7 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "Design" }),
+    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "cover" }),
     openModal: book => dispatch(openModal(book))
   };
 }

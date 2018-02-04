@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, ActivityIndicator, TextInput } from 'react-native';
+import { StyleSheet, ActivityIndicator, TextInput, View } from 'react-native';
 import CoversList from '../Covers/CoversList';
 import { openModal, editQuery } from '../../actions';
 
@@ -34,11 +34,12 @@ class Search extends React.Component {
             onSubmitEditing={() => this.props.fetchCovers(this.props.query)} />
         }
         listFooterComponent={
-          <ActivityIndicator
-            style={styles.indicator}
-            animating={this.props.loading}
-            size="large"
-            color="peru"/>
+          this.props.loading
+            ? <ActivityIndicator
+                style={styles.indicator}
+                size="large"
+                color="peru"/>
+            : <View/>
         }
       />
     )
