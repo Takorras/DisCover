@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     height: 56,
-    backgroundColor: "peru"
+    backgroundColor: "sienna"
   },
   toolbarTitle: {
     color: "white",
@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     height: StatusBar.currentHeight,
-    width: "100%",
-    backgroundColor: "peru"
+    width: "100%"
   }
 });
 
@@ -36,7 +35,7 @@ const TabNavigation = TabNavigator({
   animationEnabled: true,
   tabBarOptions: {
     style: {
-      backgroundColor: "peru"
+      backgroundColor: "sienna"
     }
   }
 });
@@ -45,7 +44,12 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.statusBar}/>
+        <View style={styles.statusBar}>
+          <StatusBar
+            backgroundColor={'saddlebrown'}
+            barStyle="light-content"
+            translucent/>
+        </View>
         <ToolbarAndroid
           style={styles.toolbar}
           actions={[{title: "Settings", icon: require("./settings.png"), show: "always"}]}
