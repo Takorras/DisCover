@@ -22,7 +22,7 @@ class Covers extends React.Component {
   }
 
   onEndReached() {
-    if (!this.props.loading) this.props.fetchCovers();
+    if (!this.props.loading) this.props.fetchCovers(randomWord());
   }
 
   render() {

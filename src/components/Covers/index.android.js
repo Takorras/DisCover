@@ -30,7 +30,7 @@ class Covers extends React.Component {
       <CoversList
         data={this.props.books}
         onClick={this.props.openModal}
-        onEndReached={() => this.onEndReached()}
+        onEndReached={() => this.onEndReached(randomWord())}
         listFooterComponent={
           <ActivityIndicator
             style={styles.indicator}
