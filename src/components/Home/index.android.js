@@ -52,7 +52,7 @@ class Home extends React.Component {
         </View>
         <ToolbarAndroid
           style={styles.toolbar}
-          actions={[{title: "Settings", icon: require("./settings.png"), show: "always"}]}
+          actions={[{title: "Settings", icon: require("./settings.png"), show: "never"}]}
         >{<Text style={styles.toolbarTitle}>DisCover</Text>}</ToolbarAndroid>
         <TabNavigation/>
         <ImageModal/>

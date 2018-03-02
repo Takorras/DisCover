@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, ActivityIndicator } from 'react-native';
+import randomWord from 'random-words';
 import CoversList from './CoversList';
 import { openModal } from '../../actions';
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
 
 class Covers extends React.Component {
   componentDidMount() {
-    this.props.fetchCovers();
+    this.props.fetchCovers(randomWord());
   }
 
   onEndReached() {
@@ -50,7 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: "cover" }),
+    fetchCovers: query => dispatch({ type: 'FETCH_COVER_REQUESTED', query: query }),
     openModal: book => dispatch(openModal(book))
   };
 }
