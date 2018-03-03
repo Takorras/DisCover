@@ -3,7 +3,7 @@
 ## About
 本の表紙を永遠と眺めるモバイルアプリケーション
 
-![Imgur](https://i.imgur.com/tZRnx4vl.png)
+![Imgur](https://i.imgur.com/fvxCaxRl.png)
 ![Imgur](https://i.imgur.com/lZXBhRzl.png)
 ![Imgur](https://i.imgur.com/Z4i6q0Xl.png)
 
